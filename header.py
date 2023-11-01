@@ -48,6 +48,8 @@ class battleShip:
 
 
 
+
+
 class connectFour:
     def __init__(self):
         self.board = [['*'] * 7 for _ in range(6)]
@@ -55,6 +57,11 @@ class connectFour:
     def printBoard(self):
         for i in range(6):
             print(self.board[i])
+
+    #def place(self, col: int):
+     #   for i in range(self.board[0]):
+            
+
 
     def winCheck(self):
         directions = [(0, 1), (1, 0), (1, 1), (-1, 1)]
@@ -73,6 +80,12 @@ class connectFour:
         if self.moves == self.rows * self.columns:
             return "Tie"
         return None
+
+    def play(self):
+        print("In process, check back later\n")
+
+
+
 
 class TicTacToe:
     def __init__(self):
