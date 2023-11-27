@@ -1,11 +1,15 @@
 import random
 import time
 
+def login(): # This is just here to say we have a login function
+    username = input("Hi, what's your name?: \0")
+    return username
 
-class battleShip:
+class battleShip: #=============================================================================
     def __init__(self, size: int):
         self.size: int = size
         self.board = [['O'] * size for _ in range(size)]
+        self.firedBoard = [['*'] * size for _ in range(size)]
         for i in range(size):
             randRow = random.randrange(size)
             randCol = random.randrange(size)
@@ -18,27 +22,32 @@ class battleShip:
     def check(self, row: int, column: int):
         return self.board[row][column] == 'O'
     
-    def printBoard(self): #prints rows x columns for debugging/cheating
+    def cheatPrintBoard(self): #prints rows x columns for debugging/cheating
         for i in self.board:
             print(" " + str(i))
         print("Ships left: " + str(self.ships))
     
+    def printBoard(self):
+        for i in self.firedBoard:
+            print(" " + str(i))
+        print("Ships left: " + str(self.ships))
+
     def fire(self, row: int, col: int):
         if(self.check(row,col)):
+            self.firedBoard[row][col] = 'O'
             print("Miss")
         else:
             print("Hit")
             self.board[row][col] = 'O'
+            self.firedBoard[row][col] = 'X'
             self.ships -= 1
 
     def play(self):
         while(self.ships > 0):
             print("Ships left: " + str(self.ships))
             self.printBoard()
-            row: int = input("Input row to fire at: (1 - " + str(self.size) + "): ")
-            col: int = input("Input column to fire at: (1 - " + str(self.size) + "): ")
-            row: int = int(row)
-            col: int = int(col)
+            row: int = int(input("Input row to fire at: (1 - " + str(self.size) + "): "))
+            col: int = int(input("Input column to fire at: (1 - " + str(self.size) + "): "))
             if((int(row) > int(self.size)) or (int(col) > int(self.size))):
                 print("Out of range")
                 continue
@@ -50,7 +59,7 @@ class battleShip:
 
 
 
-class connectFour:
+class connectFour: #=============================================================================
     def __init__(self):
         self.board = [['*'] * 7 for _ in range(6)]
 
@@ -89,7 +98,7 @@ class connectFour:
 
 
 
-class TicTacToe:
+class TicTacToe: #=============================================================================
     def __init__(self):
         self.board = [" " for _ in range(9)]  # Create an empty board
         self.current_player = "X"
