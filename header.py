@@ -10,7 +10,7 @@ class battleShip:
             randRow = random.randrange(size)
             randCol = random.randrange(size)
             if (self.check(randRow, randCol)):
-                self._board[randRow][randCol] = 'X'
+                self.board[randRow][randCol] = 'X'
             else:
                 i -= i
         self.ships = size
@@ -32,7 +32,7 @@ class battleShip:
             self.ships -= 1
 
     def play(self):
-        while(self._ships > 0):
+        while(self.ships > 0):
             print("Ships left: " + str(self.ships))
             self.printBoard()
             row: int = input("Input row to fire at: (1 - " + str(self.size) + "): ")
@@ -58,8 +58,10 @@ class connectFour:
         for i in range(6):
             print(self.board[i])
 
-    #def place(self, col: int):
-     #   for i in range(self.board[0]):
+    def place(self, col: int):
+        for i in range(self.board[0]):
+            if(self.board[col][i] == '*'):
+                break
             
 
 
