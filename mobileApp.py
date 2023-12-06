@@ -12,9 +12,9 @@ username = login()
 choice = 0
 while(choice != 4):
     choice = int(input("Hi, " + username + "\n"
-                       "1. BattleShip\n"
+                       "1. BattleShip (1 player)\n"
                        "2. Connect Four (Cut from final project)\n"
-                       "3. Tic Tac Toe (2 player)\n"
+                       "3. Tic Tac Toe\n"
                        "4. Exit\n"
                        + username + 
                        ", what game would you like to play (1-4): \0"))
@@ -30,7 +30,7 @@ while(choice != 4):
         game.printBoard()
         game.play()
     if(choice == 3):
-        game = TicTacToe()
+        game = TicTacToe(input("Singleplayer? (y/n): "),input("Select X or O?: "))
         game.play()
     elif(choice == 4):
         continue

@@ -54,11 +54,12 @@ class battleShip: #=============================================================
         
             self.fire(row - 1, col - 1)
         print("You win!")
+        self.printBoard()
 
 
 
 
-
+# Cut from final game
 class connectFour: #=============================================================================
     def __init__(self):
         self.board = [['*'] * 7 for _ in range(6)]
@@ -99,9 +100,16 @@ class connectFour: #============================================================
 
 
 class TicTacToe: #=============================================================================
-    def __init__(self):
+    def __init__(self,bot,piece):
         self.board = [" " for _ in range(9)]  # Create an empty board
-        self.current_player = "X"
+        if(piece == 'o' or 'O'):
+            self.current_player = 'O'
+        else:
+            self.current_player = 'X'
+        if(bot == 'Y' or 'y'):
+            self.bot = 1
+        else:
+            self.bot = 0
 
     def print_board(self):
         for i in range(0, 9, 3):
@@ -112,7 +120,20 @@ class TicTacToe: #==============================================================
     def make_move(self, position):
         if self.board[position] == " ":
             self.board[position] = self.current_player
-            self.current_player = "X" if self.current_player == "O" else "O"
+            
+            if(not self.bot):
+                self.current_player = "X" if self.current_player == "O" else "O"
+            else:
+                self.current_player = "X" if self.current_player == "O" else "O"
+                while " " in self.board:
+                    position = random.randrange(1,9)
+                    if self.board[position] == " ":
+                        self.board[position] = self.current_player
+                        break
+                self.print_board()
+                print("Bot turn")
+                self.current_player = "X" if self.current_player == "O" else "O"
+                return True
             return True
         else:
             return False
@@ -129,10 +150,11 @@ class TicTacToe: #==============================================================
                 return self.board[combo[0]]
         if " " not in self.board:
             return "Tie"
-        return None
+        return ""
 
     def play(self):
-        while True:
+        winner = ""
+        while winner == "":
             self.print_board()
             try:
                 position = int(input(f"Player {self.current_player}, enter your move (1-9): "))
@@ -150,4 +172,4 @@ class TicTacToe: #==============================================================
                         print("It's a tie!")
                     else:
                         print(f"Player {winner} wins!")
-                    break
+                    continue
